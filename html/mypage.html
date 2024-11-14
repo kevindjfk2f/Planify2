@@ -1,123 +1,171 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My Page</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
-    <script type="module" defer src="/js/test.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-auth.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-firestore.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.2.9/firebase-storage.js"></script>
+    <title>Planify 마이페이지</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #ffffff;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
+            background-image: url('/mnt/data/60768879c48bc.jpg'); /* 배경 이미지 경로 */
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        .container {
+            width: 400px;
             padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            background-color: rgba(255, 255, 255, 0.8); /* 반투명 흰색 배경 */
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
         }
-        .my-page-container {
-            background-color: #ffffff;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-            padding: 20px;
-            width: 100%;
-            margin-top: 100px;
-            animation: fadeInUp 1s;
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            cursor: pointer; /* 로고에 클릭 가능 표시 */
         }
-        .profile-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 15px;
-        }
-        h1 {
-            color: #333;
-            margin: 0;
-        }
-        .profile-info {
-            display: flex;
-            flex-direction: column;
+        .nav-buttons {
+            text-align: left;
             margin-bottom: 20px;
         }
-        .profile-info p {
+        .nav-buttons button {
+            display: block;
+            width: 100%;
+            background: none;
+            border: none;
+            padding: 10px;
             margin: 5px 0;
+            font-size: 16px;
+            cursor: pointer;
+            text-align: left;
         }
-        .edit-button {
-            background-color: #007bff;
+        .profile {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            cursor: pointer;
+        }
+        .profile img {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background-color: #ccc;
+            object-fit: cover;
+        }
+        .profile input[type="file"] {
+            display: none; /* 파일 입력 숨김 */
+        }
+        .status-message {
+            margin-top: 10px;
+            padding: 8px 12px;
+            background-color: #d8f3d8;
+            border-radius: 15px;
+            display: inline-block;
+            font-size: 14px;
+            color: #555;
+            text-align: center;
+        }
+        .gear-icon {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+            cursor: pointer;
+        }
+        .name {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .action-buttons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .action-buttons button {
+            width: 45%;
+            padding: 12px;
+            font-size: 16px;
+            margin: 0 5px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .action-buttons button .icon {
+            font-size: 20px;
+            margin-top: 5px;
+            color: #333;
+        }
+        .save-button {
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #88d4a6;
             color: white;
             border: none;
-            border-radius: 5px;
-            padding: 10px 20px;
-            cursor: pointer;
-            font-size: 16px;
-            transition: background-color 0.3s;
-        }
-        .edit-button:hover {
-            background-color: #0056b3;
-        }
-        .post-container h2 {
-            margin-bottom: 10px;
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 5px;
-        }
-        .post {
-            background-color: #f9f9f9;
             border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin-bottom: 15px;
-            padding: 15px;
-        }
-        .post h3 {
-            margin: 0 0 10px;
-            color: #007bff;
-        }
-        .post p {
-            margin: 0;
-            color: #555;
+            font-size: 16px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
-    <div class="my-page-container animate__animated animate__fadeInUp">
-        <div class="profile">
-            <div class="profile-header">
-                <h1>My Page</h1>
-                <button class="edit-button animate__animated animate__pulse animate__infinite">정보 수정</button>
-            </div>
-            <div class="profile-info">
-                <p id="userName"><strong>이름:</strong> </p>
-                <p id="email"><strong>이메일:</strong> </p>
-            </div>
+    <div class="container">
+        <div class="logo" id="logo">Planify</div>
+        <div class="nav-buttons">
+            <button>마이페이지</button>
+            <button>새로운 고침</button>
+            <button>비밀번호 변경</button>
         </div>
-    </div>
-    <div class="my-page-container animate__animated animate__fadeInUp">
-        <div class="post-container">
-            <h2>내 게시물</h2>
-            <div class="post">
-                <h3>게시물 제목 1</h3>
-                <p>이것은 첫 번째 게시물의 내용입니다. 간단한 내용 예시입니다.</p>
-            </div>
-            <div class="post">
-                <h3>게시물 제목 2</h3>
-                <p>이것은 두 번째 게시물의 내용입니다. 더 많은 예시가 들어갈 수 있습니다.</p>
-            </div>
-            <div class="post">
-                <h3>게시물 제목 3</h3>
-                <p>이것은 세 번째 게시물의 내용입니다. 게시물은 필요에 따라 추가할 수 있습니다.</p>
-            </div>
+        <div class="profile" id="profile">
+            <img src="https://via.placeholder.com/150" alt="프로필 사진" id="profileImage">
+            <input type="file" id="fileInput" accept="image/*">
+            <div class="gear-icon">⚙️</div>
+            <div class="status-message">상태메시지를 입력해주세요.</div>
         </div>
+        <div class="name">이름: 정재윤</div>
+        <div class="action-buttons">
+            <button>
+                여행 보관함
+                <span class="icon">✈️</span>
+            </button>
+            <button>
+                나와의 채팅
+                <span class="icon">💬</span>
+            </button>
+        </div>
+        <button class="save-button">저장</button>
     </div>
 
     <script>
-        document.querySelector('.edit-button').addEventListener('click', () => {
-            alert('정보 수정 화면으로 이동합니다.');
+        // Planify 로고 클릭 시 첫 화면으로 이동
+        document.getElementById('logo').addEventListener('click', () => {
+            window.location.href = '/html/index.html'; // 첫 화면의 실제 경로로 수정하세요.
+        });
+
+        // 프로필 이미지 클릭 시 파일 업로드
+        document.getElementById('profile').addEventListener('click', () => {
+            document.getElementById('fileInput').click();
+        });
+
+        // 업로드된 이미지 미리 보기
+        document.getElementById('fileInput').addEventListener('change', (event) => {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function (e) {
+                    document.getElementById('profileImage').src = e.target.result;
+                };
+                reader.readAsDataURL(file);
+            }
         });
     </script>
 </body>
