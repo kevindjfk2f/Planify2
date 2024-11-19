@@ -1,33 +1,121 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Planify 북마크</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            background-color: #f5f5f5;
+        }
+
+        header {
+            font-size: 24px;
+            font-weight: bold;
+            padding: 20px;
+            border-bottom: 1px solid #ddd;
+            position: relative;
+        }
+
+        .mypage-button {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            font-size: 14px;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            background-color: white;
+            cursor: pointer;
+        }
+
+        .bookmark-title {
+            font-size: 20px;
+            margin: 20px 0;
+        }
+
+        .bookmark-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+        }
+
+        .bookmark {
+            width: 200px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            overflow: hidden;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .bookmark img {
+            width: 100%;
+            height: auto;
+        }
+
+        .bookmark-info {
+            padding: 10px;
+            text-align: left;
+        }
+
+        .bookmark-info h3 {
+            margin: 0 0 5px;
+            font-size: 16px;
+        }
+
+        .rating {
+            color: #d00;
+            margin: 5px 0;
+        }
+
+        .price {
+            font-weight: bold;
+            font-size: 16px;
+        }
+    </style>
+</head>
 <body>
-    <div class="container">
-      <div class="left-panel">
-        <div class="buttons">
-          <button class="mypage-button">마이페이지</button>
-          <button class="bookmark-button">즐겨찾기</button>
+
+<header>
+    Planify
+    <button class="mypage-button">마이페이지</button>
+</header>
+
+<h2 class="bookmark-title">북마크</h2>
+
+<div class="bookmark-container">
+    <div class="bookmark">
+        <img src="C:\Users\kevin\OneDrive\Desktop\제목 없음.png" alt="해운대">
+        <div class="bookmark-info">
+            <h3>해운대 Haeundae</h3>
+            <div class="rating">★ 4.3 (233)</div>
+            <div class="price">₩587,150</div>
         </div>
-      </div>
-  
-      <!-- 메인 콘텐츠 -->
-      <div id="main-content" class="section active">
-        <p>여기에는 일반 콘텐츠가 표시됩니다.</p>
-      </div>
-  
-      <!-- 북마크 콘텐츠 -->
-      <div id="bookmark-section" class="section" style="display:none;">
-        <div class="bookmark-container">
-          <div class="bookmark">
-            <img src="haeundae.jpg" alt="해운대">
-            <div class="bookmark-info">
-              <h3>해운대 Haeundae</h3>
-              <div class="rating">★ 4.3 (233)</div>
-              <div class="price">₩587,150</div>
-            </div>
-          </div>
-          <!-- 다른 북마크 항목 -->
-        </div>
-      </div>
     </div>
-  
-    <script src="/js/info.js"></script>
-  </body>
-  
+    <div class="bookmark">
+        <img src="C:\Users\kevin\OneDrive\Desktop\제목 없음1.png" alt="광안리">
+        <div class="bookmark-info">
+            <h3>광안리 Gwangalli</h3>
+            <div class="rating">★ 4.3 (233)</div>
+            <div class="price">₩607,300</div>
+        </div>
+    </div>
+    <div class="bookmark">
+        <img src="C:\Users\kevin\OneDrive\Desktop\제목 없음3.png" alt="영도">
+        <div class="bookmark-info">
+            <h3>영도 Yeongdo</h3>
+            <div class="rating">★ 4.3 (233)</div>
+            <div class="price">₩347,300</div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
